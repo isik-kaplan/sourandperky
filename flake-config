@@ -3,7 +3,9 @@ max-line-length = 120
 ignore =
     # __init__ imports
     F401,
+    # lambdas are fun
+    E731,
 exclude =
-    /sourandperky/apps/notifications/migrations/*
-    /sourandperky/apps/sour_and_perky/migrations/*
+    sourandperky\apps\sour_and_perky\migrations\*,
+    sourandperky\apps\notification\migrations\*
 
