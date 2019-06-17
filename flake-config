@@ -1,0 +1,9 @@
+[flake8]
+max-line-length = 120
+ignore =
+    # __init__ imports
+    F401,
+exclude =
+    /sourandperky/apps/notifications/migrations/*
+    /sourandperky/apps/sour_and_perky/migrations/*
+

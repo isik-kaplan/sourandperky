@@ -1,0 +1,7 @@
+Django==2.2.2
+django-allauth==0.39.1
+django-rest-auth==0.9.5
+django-rest-framework==0.1.0
+django-urls==1.0.6
+django-simple-history==2.7.2
+psycopg2==2.8.3
