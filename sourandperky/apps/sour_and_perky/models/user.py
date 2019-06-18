@@ -2,7 +2,8 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models import F, Count
-
+from django.utils import timezone
+from utils.models import field_image_from_link
 # from utils.choices import Choices
 from .common import CommonFields
 
@@ -35,6 +36,16 @@ class User(AbstractUser, CommonFields):
     @property
     def faved_count(self):
         return self.entries.aggregate(Count(F('favers'))).get('favers__count', 0)
+
+    def random_avatar(self):
+        AVATAR_URL = "https://api.adorable.io/avatars/{}{}"
+        field_image_from_link(
+            self,
+            'avatar',
+            '{}{}'.format(self.username, timezone.now()),
+            AVATAR_URL.format(self.username, timezone.now().timestamp())
+        )
+        self.save()
 
     class Meta:
         ...
