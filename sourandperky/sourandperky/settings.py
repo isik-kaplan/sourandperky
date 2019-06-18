@@ -172,3 +172,9 @@ AUTHENTICATION_BACKENDS = (
 REST_AUTH_SERIALIZERS = {
     # 'USER_DETAILS_SERIALIZER': 'path.to.custom.GameUserSerializer',
 }
+
+# whitenoise
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+WHITENOISE_AUTOREFRESH = True

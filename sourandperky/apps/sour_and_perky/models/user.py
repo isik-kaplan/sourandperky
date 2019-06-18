@@ -1,7 +1,8 @@
 from django.conf import settings
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models import F, Count
-from django.contrib.auth.models import AbstractUser
+
 # from utils.choices import Choices
 from .common import CommonFields
 
@@ -16,6 +17,7 @@ class User(AbstractUser, CommonFields):
     reported = models.ManyToManyField('Entry', blank=True, related_name='reported_by')
     followed_titles = models.ManyToManyField('Title', blank=True, related_name="followers")
     followed_users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name="followers")
+    avatar = models.ImageField(blank=True, null=True, upload_to='avatars')
 
     # themes = Choices({
     #     'default': 'path_to_default_stylesheet'

@@ -3,6 +3,7 @@ import pathlib
 
 from django.conf import settings
 from django.core.checks import register, Tags, Debug
+import os.path
 
 
 class FileSystemTags(Tags):
@@ -15,7 +16,11 @@ def check_paths_exist(app_configs=None, **kwargs):
     Check if the required file and folders exist, and try to create the possible ones.
     """
 
-    REQUIRED_PATHS = [settings.MEDIA_ROOT, settings.STATIC_ROOT]
+    REQUIRED_PATHS = [
+        settings.MEDIA_ROOT,
+        settings.STATIC_ROOT,
+        os.path.join(settings.MEDIA_ROOT, 'avatars')
+    ]
     errors = []
 
     def created_the_absent(file, error_id):
