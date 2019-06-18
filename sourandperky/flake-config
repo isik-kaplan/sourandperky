@@ -6,6 +6,6 @@ ignore =
     # lambdas are fun
     E731,
 exclude =
-    sourandperky\apps\sour_and_perky\migrations\*,
-    sourandperky\apps\notification\migrations\*
+    apps\sour_and_perky\migrations\*,
+    apps\notification\migrations\*
 
