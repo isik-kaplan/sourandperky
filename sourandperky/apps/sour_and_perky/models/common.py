@@ -16,7 +16,7 @@ def first_user_id(cache={'user': None}):
 
 class CommonFields(models.Model):
     # fields
-    timestamp = models.DateTimeField(default=timezone.now, db_index=True)
+    timestamp = models.DateTimeField(default=timezone.now, db_index=True, editable=False)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     # managers
