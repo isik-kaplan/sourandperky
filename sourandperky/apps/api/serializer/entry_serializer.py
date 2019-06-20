@@ -10,7 +10,10 @@ class EntrySerializer(ConditionalSerializerMixin, serializers.ModelSerializer):
     liked = serializers.SerializerMethodField('is_liked', read_only=True)
     disliked = serializers.SerializerMethodField('is_disliked', read_only=True)
     faved = serializers.SerializerMethodField('is_faved', read_only=True)
-
+    author = serializers.PrimaryKeyRelatedField(
+        read_only=True,
+        default=serializers.CurrentUserDefault()
+    )
 
     @staticmethod
     def is_liked(obj):
@@ -45,5 +48,5 @@ class EntrySerializer(ConditionalSerializerMixin, serializers.ModelSerializer):
         ]
         relational_fields = {
             'title': lambda: TitleSerializer(read_only=True),
-            'author': lambda: UserSerializer(read_only=True),
+            'author': lambda: UserSerializer(read_only=True, default=serializers.CurrentUserDefault()),
         }
