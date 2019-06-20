@@ -1,5 +1,6 @@
 from .entry import EntryViewSet
+from .event import EventViewSet
 from .title import TitleViewSet
 from .title_channels import TitleChannelViewSet
 from .user import UserViewSet
-from .event import EventViewSet
+from .user_trophy import UserTrophyViewSet
