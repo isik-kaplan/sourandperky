@@ -56,6 +56,7 @@ INSTALLED_APPS = [
 
     # third party model
     'simple_history',
+    'django_filters',
 
     # custom
     'apps.api.apps.ApiConfig',
@@ -178,3 +179,12 @@ REST_AUTH_SERIALIZERS = {
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 WHITENOISE_AUTOREFRESH = True
+
+# DRF configuration
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
+    ),
+}

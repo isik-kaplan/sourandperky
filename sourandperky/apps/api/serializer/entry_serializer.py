@@ -40,7 +40,8 @@ class EntrySerializer(ConditionalSerializerMixin, serializers.ModelSerializer):
             'liked',
             'disliked',
             'faved',
-            'author'
+            'author',
+            'readability',
         ]
         conditional_fields = [
             'author',

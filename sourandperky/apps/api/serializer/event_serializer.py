@@ -4,6 +4,12 @@ from apps.sour_and_perky.models import Event
 
 
 class EventSerializer(serializers.ModelSerializer):
+    is_active = serializers.SerializerMethodField()
+
+    @staticmethod
+    def get_is_active(obj):
+        return obj.is_active
+
     class Meta:
         model = Event
         fields = [
@@ -14,4 +20,5 @@ class EventSerializer(serializers.ModelSerializer):
             'desc',
             'start_date',
             'end_date',
+            'is_active',
         ]

@@ -7,8 +7,6 @@ from .user_serializer import UserSerializer
 
 
 class TitleSerializer(ConditionalSerializerMixin, serializers.ModelSerializer):
-    creator = UserSerializer()
-
     class Meta:
         model = Title
         fields = [
@@ -23,8 +21,10 @@ class TitleSerializer(ConditionalSerializerMixin, serializers.ModelSerializer):
         ]
         conditional_fields = [
             'channels',
+            'creator',
         ]
 
         relational_fields = {
-            'channels': lambda: TitleChannelSerializer(many=True)
+            'channels': lambda: TitleChannelSerializer(many=True, read_only=True),
+            'creator': lambda: UserSerializer(read_only=True)
         }
