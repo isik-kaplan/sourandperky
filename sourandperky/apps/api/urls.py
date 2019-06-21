@@ -13,6 +13,7 @@ router.register(r'titles', views.TitleViewSet)
 router.register(r'title_channels', views.TitleChannelViewSet)
 router.register(r'events', views.EventViewSet)
 router.register(r'user_trophies', views.UserTrophyViewSet)
+router.register(r'notifications', views.NotificationViewSet)
 
 api_urls._url_patterns += [
     path('', include(router.urls))
