@@ -1,12 +1,18 @@
 from rest_framework import serializers
 
 from apps.sour_and_perky.models import Title
+from .conditional_serializer import ConditionalSerializerMixin
 from .title_channel import TitleChannelSerializer
 from .user import UserSerializer
-from .conditional_serializer import ConditionalSerializerMixin
 
 
 class TitleSerializer(ConditionalSerializerMixin, serializers.ModelSerializer):
+    following = serializers.SerializerMethodField()
+
+    @staticmethod
+    def get_following(obj):
+        return bool(getattr(obj, 'following', False))
+
     class Meta:
         model = Title
         fields = [
@@ -15,6 +21,7 @@ class TitleSerializer(ConditionalSerializerMixin, serializers.ModelSerializer):
             'text',
             'channels',
             'creator',
+            'following',
         ]
         read_only_fields = [
             'creator',
