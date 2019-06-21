@@ -2,8 +2,9 @@ from django.db.models import Q, ExpressionWrapper, BooleanField
 from django.utils import timezone
 from rest_framework import viewsets
 
-from ..filters.event import EventFilter
-from ..serializer.event_serializer import Event, EventSerializer
+from apps.sour_and_perky.models import Event
+from ..filters import EventFilter
+from ..serializer import EventSerializer
 
 
 class EventViewSet(viewsets.ModelViewSet):

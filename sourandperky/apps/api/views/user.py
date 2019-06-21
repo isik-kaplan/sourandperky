@@ -1,7 +1,8 @@
 from rest_framework import viewsets
 
-from ..filters.user import UserFilter
-from ..serializer.user_serializer import UserSerializer, User
+from apps.sour_and_perky.models import User
+from ..filters import UserFilter
+from ..serializer import UserSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):

@@ -1,8 +1,9 @@
 from django.db.models import ExpressionWrapper, BooleanField, Q
 from rest_framework import viewsets
 
-from ..filters.entry import EntryFilter
-from ..serializer.entry_serializer import Entry, EntrySerializer
+from apps.sour_and_perky.models import Entry
+from ..filters import EntryFilter
+from ..serializer import EntrySerializer
 
 
 class EntryViewSet(viewsets.ModelViewSet):

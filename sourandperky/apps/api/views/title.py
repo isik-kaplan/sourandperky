@@ -1,8 +1,9 @@
 from django.db.models import Count
 from rest_framework import viewsets
 
-from ..filters.title import TitleFilter
-from ..serializer.title_serializer import Title, TitleSerializer
+from apps.sour_and_perky.models import Title
+from ..filters import TitleFilter
+from ..serializer import TitleSerializer
 
 
 class TitleViewSet(viewsets.ModelViewSet):

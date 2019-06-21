@@ -1,7 +1,8 @@
 from rest_framework import viewsets
 
-from ..filters.title_channel import TitleChannelFilter
-from ..serializer.title_channel_serializer import TitleChannel, TitleChannelSerializer
+from apps.sour_and_perky.models import TitleChannel
+from ..filters import TitleChannelFilter
+from ..serializer import TitleChannelSerializer
 
 
 class TitleChannelViewSet(viewsets.ModelViewSet):

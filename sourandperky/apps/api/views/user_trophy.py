@@ -1,7 +1,8 @@
 from rest_framework import viewsets
 
-from ..filters.user_trophy import UserTrophyFilter
-from ..serializer.user_trophy_serializer import UserTrophySerializer, UserTrophy
+from apps.sour_and_perky.models import UserTrophy
+from ..filters import UserTrophyFilter
+from ..serializer import UserTrophySerializer
 
 
 class UserTrophyViewSet(viewsets.ModelViewSet):

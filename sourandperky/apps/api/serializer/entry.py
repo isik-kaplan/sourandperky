@@ -2,8 +2,8 @@ from rest_framework import serializers
 
 from apps.sour_and_perky.models import Entry
 from .conditional_serializer import ConditionalSerializerMixin
-from .title_serializer import TitleSerializer
-from .user_serializer import UserSerializer
+from .title import TitleSerializer
+from .user import UserSerializer
 
 
 class EntrySerializer(ConditionalSerializerMixin, serializers.ModelSerializer):
