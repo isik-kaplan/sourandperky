@@ -1,1 +1,2 @@
 from .is_owner_or_deny import IsOwnerOrDeny
+from .is_the_current_user import IsCurrentUserOrReadOnly

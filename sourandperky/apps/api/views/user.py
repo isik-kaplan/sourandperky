@@ -1,12 +1,13 @@
 from django.db.models import ExpressionWrapper, Q, BooleanField
-from rest_framework import viewsets
 
 from apps.sour_and_perky.models import User
+from .common import UpdateRetrieveListViewSet
 from ..filters import UserFilter
+from ..permissions import IsCurrentUserOrReadOnly
 from ..serializer import UserSerializer
 
 
-class UserViewSet(viewsets.ReadOnlyModelViewSet):
+class UserViewSet(UpdateRetrieveListViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
@@ -17,3 +18,4 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
 
     filterset_class = UserFilter
     search_fields = ['username', 'first_name', 'last_name']
+    permission_classes = (IsCurrentUserOrReadOnly,)
