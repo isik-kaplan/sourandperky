@@ -1,4 +1,4 @@
-from django.db.models import ExpressionWrapper, BooleanField, Q, Count, IntegerField, F
+from django.db.models import ExpressionWrapper, BooleanField, Q, Count, F
 from rest_framework import viewsets
 
 from apps.sour_and_perky.models import Entry
@@ -22,3 +22,5 @@ class EntryViewSet(viewsets.ModelViewSet):
     filterset_class = EntryFilter
 
     search_fields = ['text']
+
+    ordering_fields = ['points', 'timestamp']
