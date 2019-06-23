@@ -65,7 +65,7 @@ INSTALLED_APPS = [
     'apps.sour_and_perky.apps.SourAndPerkyConfig',
 ]
 
-SITE_ID = 1
+SITE_ID = 2
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
