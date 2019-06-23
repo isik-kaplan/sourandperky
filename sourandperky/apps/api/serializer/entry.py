@@ -14,6 +14,7 @@ class EntrySerializer(ConditionalSerializerMixin, serializers.ModelSerializer):
         read_only=True,
         default=serializers.CurrentUserDefault()
     )
+    points = serializers.SerializerMethodField(read_only=True)
 
     @staticmethod
     def is_liked(obj):
@@ -30,6 +31,10 @@ class EntrySerializer(ConditionalSerializerMixin, serializers.ModelSerializer):
         faved = getattr(obj, 'faved', False)
         return bool(faved)
 
+    @staticmethod
+    def get_points(obj):
+        return obj.points
+
     class Meta:
         model = Entry
         fields = [
@@ -42,6 +47,7 @@ class EntrySerializer(ConditionalSerializerMixin, serializers.ModelSerializer):
             'faved',
             'author',
             'readability',
+            'points'
         ]
         conditional_fields = [
             'author',

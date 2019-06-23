@@ -1,4 +1,4 @@
-from django.db.models import ExpressionWrapper, BooleanField, Q
+from django.db.models import ExpressionWrapper, BooleanField, Q, Count, IntegerField, F
 from rest_framework import viewsets
 
 from apps.sour_and_perky.models import Entry
@@ -16,6 +16,7 @@ class EntryViewSet(viewsets.ModelViewSet):
             liked=ExpressionWrapper(Q(likers__id=user.id or 1), output_field=BooleanField()),
             disliked=ExpressionWrapper(Q(dislikers__id=user.id or 1), output_field=BooleanField()),
             faved=ExpressionWrapper(Q(favers__id=user.id or 1), output_field=BooleanField()),
+            points=Count(F('likers'), distinct=True) - Count(F('dislikers'), distinct=True),
         )
 
     filterset_class = EntryFilter
