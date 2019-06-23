@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from apps.sour_and_perky.models import Title
-from .conditional_serializer import ConditionalSerializerMixin
+from ..serializer.base_serializers import ConditionalSerializerMixin
 from .title_channel import TitleChannelSerializer
 from .user import UserSerializer
 
