@@ -1,7 +1,9 @@
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 
 from apps.notification.models import Notification
 from ..filters import NotificationFilter
+from ..permissions import IsOwnerOrDeny
 from ..serializer import NotificationSerializer
 
 
@@ -14,3 +16,4 @@ class NotificationViewSet(viewsets.ReadOnlyModelViewSet):
 
     filterset_class = NotificationFilter
     search_fields = ['desc', 'short_desc']
+    permission_classes = (IsAuthenticated, IsOwnerOrDeny,)

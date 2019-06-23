@@ -34,3 +34,7 @@ class Notification(models.Model):
     })
 
     type = models.CharField(choices=types.choices, max_length=50, default=types.NOTIFICATION)
+
+    @property
+    def owner(self):
+        return self.user
