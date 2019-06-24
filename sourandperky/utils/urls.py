@@ -12,6 +12,6 @@ def url_mapping(urls, app_label=None):
         else:
             resolver = url
             name = resolver.resolve(resolver.pattern).url_name
-            mapped[name] = prefix+name
+            mapped[name] = prefix + name
 
     return mapped
