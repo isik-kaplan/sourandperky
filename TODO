@@ -1,3 +1,4 @@
 - Decide between .yml or .py for configuration file.
 - Find a better way to express `Q(likers__id=user.id or 1)` instead of hacky non existent id
 - clean api/urls mess
+- fix api bread-crumbs and docs

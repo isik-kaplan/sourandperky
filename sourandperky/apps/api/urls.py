@@ -1,12 +1,13 @@
 from django.urls import path, include
+from rest_auth.registration.urls import urlpatterns as rest_auth_registration_urls
+from rest_auth.urls import urlpatterns as rest_auth_urls
+from rest_framework.routers import APIRootView
 
+from utils.urls import url_mapping
 from . import views
 from .router import RooterWithUrls
 from .views.authentication.urls import social_auth_urls
-from rest_auth.urls import urlpatterns as rest_auth_urls
-from rest_framework.routers import APIRootView
-from utils.urls import url_mapping
-from rest_auth.registration.urls import urlpatterns as rest_auth_registration_urls
+from .views.relations import relation_urls
 
 router = RooterWithUrls()
 router.register(r'entries', views.EntryViewSet)
@@ -29,9 +30,11 @@ rest_auth_urls += [
     path('', APIRootView.as_view(api_root_dict=url_mapping(rest_auth_urls)), name='auth'),
 ]
 
+
 api_urls = [
     path('social_auth/', include(social_auth_urls)),
-    path('auth/', include(rest_auth_urls))
+    path('auth/', include(rest_auth_urls)),
+    path('relations/', include(relation_urls.url_patterns)),
 ]
 
 router.register_extra_urls(api_urls)
