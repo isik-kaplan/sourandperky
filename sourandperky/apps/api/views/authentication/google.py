@@ -1,5 +1,4 @@
 from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
-from django.urls import path
 from django_urls import UrlManager
 from rest_auth.registration.views import (
     SocialLoginView,
@@ -28,8 +27,7 @@ class GoogleDisconnect(SocialAccountDisconnectView):
     ...
 
 
-url_mapping_for_google_urls = url_mapping(google_urls.url_patterns, 'api')
-
-google_urls.extend([
-    path('', APIRootView.as_view(api_root_dict=url_mapping_for_google_urls), name='google')
-])
+@google_urls.path('', name='google')
+class Google(APIRootView):
+    """Google authentication endpoints."""
+    api_root_dict = url_mapping(google_urls.url_patterns, 'api')

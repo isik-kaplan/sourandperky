@@ -1,5 +1,4 @@
 from django.http import Http404
-from django.urls import path
 from django_urls import UrlManager
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
@@ -73,8 +72,7 @@ class FollowTitleView(relation_add_remove(Title), APIView):
     serializer_class = TitleFollowSerializer
 
 
-url_mapping_for_relations = url_mapping(relation_urls.url_patterns, 'api')
-
-relation_urls.extend([
-    path('', APIRootView.as_view(api_root_dict=url_mapping_for_relations), name='relations')
-])
+@relation_urls.path('', name='relations')
+class Relations(APIRootView):
+    """Adding relations endpoints."""
+    api_root_dict = url_mapping(relation_urls.url_patterns, 'api')

@@ -7,6 +7,9 @@ from utils.urls import url_mapping
 
 class RooterWithUrls(DefaultRouter):
 
+    class APIRootView(DefaultRouter.APIRootView):
+        """API endpoints."""
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.extra_urls = []
