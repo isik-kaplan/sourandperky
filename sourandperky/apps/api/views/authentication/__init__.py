@@ -1,1 +1,1 @@
-from .google import GoogleLogin
+from .urls import social_auth_urls

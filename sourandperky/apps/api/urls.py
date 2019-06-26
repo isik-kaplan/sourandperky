@@ -7,8 +7,6 @@ from rest_framework.routers import APIRootView
 from utils.urls import url_mapping
 from . import views
 from .router import RooterWithUrls
-from .views.authentication.urls import social_auth_urls
-from .views.relations import relation_urls
 
 router = RooterWithUrls()
 router.register(r'entries', views.EntryViewSet)
@@ -42,9 +40,9 @@ class Authentication(APIRootView):
 
 
 api_urls = [
-    path('social_auth/', include(social_auth_urls.url_patterns)),
+    path('social_auth/', include(views.social_auth_urls.url_patterns)),
     path('auth/', include(rest_auth_urls.url_patterns)),
-    path('relations/', include(relation_urls.url_patterns)),
+    path('relations/', include(views.relation_urls.url_patterns)),
 ]
 
 router.register_extra_urls(api_urls)
