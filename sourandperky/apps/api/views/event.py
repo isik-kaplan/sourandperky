@@ -1,14 +1,14 @@
 from django.db.models import Q, ExpressionWrapper, BooleanField
 from django.utils import timezone
-from rest_framework import viewsets
 
 from apps.sour_and_perky.models import Event
+from .common import NotDeletableViewSet
 from ..filters import EventFilter
 from ..paginations import custom_paginator
 from ..serializer import EventSerializer
 
 
-class EventViewSet(viewsets.ModelViewSet):
+class EventViewSet(NotDeletableViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
 

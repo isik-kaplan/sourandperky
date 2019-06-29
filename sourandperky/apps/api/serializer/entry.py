@@ -33,7 +33,7 @@ class EntrySerializer(ConditionalSerializerMixin, serializers.ModelSerializer):
 
     @staticmethod
     def get_points(obj):
-        return obj.points
+        return getattr(obj, 'points', 0)
 
     class Meta:
         model = Entry

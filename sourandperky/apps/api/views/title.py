@@ -1,13 +1,13 @@
 from django.db.models import Count, Q, ExpressionWrapper, BooleanField
-from rest_framework import viewsets
 
 from apps.sour_and_perky.models import Title
+from .common import NotDeletableViewSet
 from ..filters import TitleFilter
 from ..paginations import custom_paginator
 from ..serializer import TitleSerializer
 
 
-class TitleViewSet(viewsets.ModelViewSet):
+class TitleViewSet(NotDeletableViewSet):
     queryset = Title.objects.annotate(hre=Count('entries')).filter(hre__gt=0)
     serializer_class = TitleSerializer
 

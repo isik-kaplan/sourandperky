@@ -15,6 +15,10 @@ class Entry(CommonFields):
     )
     readability = models.BooleanField(default=True)
 
+    @property
+    def owner(self):
+        return self.author
+
     def __str__(self):
         return str(self.id)
 

@@ -5,7 +5,7 @@ from ..filters import UserTrophyFilter
 from ..serializer import UserTrophySerializer
 
 
-class UserTrophyViewSet(viewsets.ModelViewSet):
+class UserTrophyViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = UserTrophy.objects.all()
     serializer_class = UserTrophySerializer
     filterset_class = UserTrophyFilter

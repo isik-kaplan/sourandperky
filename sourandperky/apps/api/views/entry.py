@@ -4,6 +4,7 @@ from rest_framework import viewsets
 from apps.sour_and_perky.models import Entry
 from ..filters import EntryFilter
 from ..paginations import custom_paginator
+from ..permissions import IsOwnerOrReadOnly
 from ..serializer import EntrySerializer
 
 
@@ -20,6 +21,10 @@ class EntryViewSet(viewsets.ModelViewSet):
             points=Count(F('likers'), distinct=True) - Count(F('dislikers'), distinct=True),
         )
 
+    def perform_destroy(self, instance):
+        instance.readability = False
+        instance.save()
+
     filterset_class = EntryFilter
 
     search_fields = ['text']
@@ -27,3 +32,5 @@ class EntryViewSet(viewsets.ModelViewSet):
     ordering_fields = ['points', 'timestamp']
 
     pagination_class = custom_paginator()
+
+    permission_classes = (IsOwnerOrReadOnly,)
