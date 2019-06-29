@@ -4,6 +4,7 @@ from rest_framework import viewsets
 
 from apps.sour_and_perky.models import Event
 from ..filters import EventFilter
+from ..paginations import custom_paginator
 from ..serializer import EventSerializer
 
 
@@ -22,3 +23,5 @@ class EventViewSet(viewsets.ModelViewSet):
     filterset_class = EventFilter
 
     search_fields = ['name', 'short_desc', 'desc']
+
+    pagination_class = custom_paginator()

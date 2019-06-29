@@ -3,6 +3,7 @@ from django.db.models import ExpressionWrapper, Q, BooleanField
 from apps.sour_and_perky.models import User
 from .common import UpdateRetrieveListViewSet
 from ..filters import UserFilter
+from ..paginations import custom_paginator
 from ..permissions import IsCurrentUserOrReadOnly
 from ..serializer import UserSerializer
 
@@ -19,3 +20,4 @@ class UserViewSet(UpdateRetrieveListViewSet):
     filterset_class = UserFilter
     search_fields = ['username', 'first_name', 'last_name']
     permission_classes = (IsCurrentUserOrReadOnly,)
+    pagination_class = custom_paginator()

@@ -3,6 +3,7 @@ from rest_framework import viewsets
 
 from apps.sour_and_perky.models import Entry
 from ..filters import EntryFilter
+from ..paginations import custom_paginator
 from ..serializer import EntrySerializer
 
 
@@ -24,3 +25,5 @@ class EntryViewSet(viewsets.ModelViewSet):
     search_fields = ['text']
 
     ordering_fields = ['points', 'timestamp']
+
+    pagination_class = custom_paginator()
