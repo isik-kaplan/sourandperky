@@ -39,14 +39,14 @@ class Authentication(APIRootView):
     api_root_dict = url_mapping(rest_auth_urls.url_patterns)
 
 
-api_urls = [
+urlpatterns = [
     path('social_auth/', include(views.social_auth_urls.url_patterns)),
     path('auth/', include(rest_auth_urls.url_patterns)),
     path('relations/', include(views.relation_urls.url_patterns)),
 ]
 
-router.register_extra_urls(api_urls)
+router.register_extra_urls(urlpatterns)
 
-api_urls += [
+urlpatterns += [
     path('', include(router.urls))
 ]
