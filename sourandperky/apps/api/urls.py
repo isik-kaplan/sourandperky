@@ -35,7 +35,7 @@ rest_auth_urls.extend([path('registration/', include(rest_auth_registration_urls
 
 @rest_auth_urls.path('', name='auth')
 class Authentication(APIRootView):
-    "Authentication endpoints."
+    """Authentication endpoints."""
     api_root_dict = url_mapping(rest_auth_urls.url_patterns)
 
 
