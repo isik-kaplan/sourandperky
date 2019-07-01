@@ -41,9 +41,8 @@ const METHODS = {
 };
 
 function filter_undefined(obj) {
-    let new_obj = JSON.parse(JSON.stringify(obj)); // We want to return a new object, filtered out
-    Object.keys(new_obj).forEach(key => new_obj[key] === undefined && delete new_obj[key]);
-    return new_obj
+    Object.keys(obj).forEach(key => obj[key] === undefined && delete obj[key]);
+    return obj
 }
 
 function build_url(url, parameters) {
@@ -82,7 +81,7 @@ function _interract(url, data, method, get_data, auth_token) {
         fetch_data.headers.Authorization = 'Token ' + auth_token
     }
     if (get_data) {
-        url = build_url(url, filter_undefined(get_data))
+        url = build_url(url, get_data)
     }
     return fetch(url, fetch_data).then(response => response.json()).catch(err => console.log(err));
 }
