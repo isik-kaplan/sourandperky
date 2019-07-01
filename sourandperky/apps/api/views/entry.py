@@ -1,5 +1,5 @@
 from django.db.models import ExpressionWrapper, BooleanField, Q, Count, F
-from rest_framework import permissions
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.viewsets import ModelViewSet
 
 from apps.sour_and_perky.models import Entry
@@ -34,4 +34,4 @@ class EntryViewSet(ModelViewSet):
 
     pagination_class = custom_paginator()
 
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
+    permission_classes = (IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
