@@ -84,7 +84,7 @@ function _interract(url, data, method, get_data, auth_token) {
     if (get_data) {
         url = build_url(url, filter_undefined(get_data))
     }
-    return fetch(url, fetch_data).then(response => response.json());
+    return fetch(url, fetch_data).then(response => response.json()).catch(err => console.log(err));
 }
 
 function interract(url, auth_token, method, is_obj, allowed_methods, default_error) {
@@ -105,9 +105,13 @@ function interract(url, auth_token, method, is_obj, allowed_methods, default_err
     } else if (method === METHODS.PUT) { // update
         console.log('UPDATE')
     } else if (method === METHODS.PATCH) { // update
-        console.log('UPDATE');
+        return function (data) {
+            return _interract(url, data, method, undefined, auth_token)
+        }
     } else if (method === METHODS.DELETE) { // delete
-        console.log('DELETE');
+        return function () {
+            return _interract(url, undefined, method, undefined, auth_token)
+        }
     } else if (method === METHODS.POST) { // create
         return function (data) {
             return _interract(url, data, method, undefined, auth_token)
@@ -166,37 +170,99 @@ class CRUD_API_ENDPOINT {
         )()
     };
 
-    update() {
+    update(id, data) {
+        return interract(
+            this.get_object_url(id),
+            this.client.token,
+            METHODS.PATCH,
+            true,
+            this.allowed_methods,
+            this.default_error_function(METHODS.PATCH)
+        )(data)
     };
 
-    delete() {
+    destroy(id) {
+        return interract(
+            this.get_object_url(id),
+            this.client.token,
+            METHODS.DELETE,
+            true,
+            this.allowed_methods,
+            this.default_error_function(METHODS.DELETE)
+        )()
     };
+
+    // aliases for crud methods
+    get all() {
+        return this.list
+    }
+
+    get new() {
+        return this.create
+    }
+
+    get get() {
+        return this.retrieve
+    }
+
+    get edit() {
+        return this.update
+    }
+
+    get delete() {
+        return this.destroy
+    }
 
 }
 
 class Entries extends CRUD_API_ENDPOINT {
     url = APIURLS.entries;
-    allowed_methods = [METHODS.GET, METHODS.POST, METHODS.PUT];
+    allowed_methods = [METHODS.GET, METHODS.POST, METHODS.PATCH, METHODS.DELETE];
 
-    /* list(get_data){}
-    All of them are optional;
-    get_data = {
-        page_size: integer -> item count in a page
-        page: integer -> page number
-        author: string -> a user id to filter with
-        title: string -> a title id to filter with
-        readability: boolean -> draft status
-        search: string -> search for entries where entry.text contains search
-        ordering: string options[points, timestamp] -> ordering of the entries
+    /*
+    list(get_data){
+        get_data = {
+            page_size: integer -> item count in a page
+            page: integer -> page number
+            author: string -> a user id to filter with
+            title: string -> a title id to filter with
+            readability: boolean -> draft status
+            search: string -> search for entries where entry.text contains search
+            ordering: string options[points, timestamp] -> ordering of the entries
+        }
     }
     */
 
-    /* create(data){}
-    All of them required;
-    data = {
-        title: string -> a title id to filter with
-        text: string -> content of the entry
-        readability: boolean -> draft status
+    /*
+    create(data){
+        data = {
+            *title: string -> a title id to filter with
+            *text: string -> content of the entry
+            *readability: boolean -> draft status
+        }
+    }
+    */
+
+    /*
+    retrieve(id){
+        *id = string -> entry id
+    }
+    */
+
+    /*
+    update(id, data){
+        *id = string -> entry id
+        *data = {
+            title: string -> a title id to filter with
+            text: string -> content of the entry
+            readability: boolean -> draft status
+        }
+    }
+    */
+
+    /*
+    delete(id){
+        *id = string -> entry id
     }
     */
 }
