@@ -1,0 +1,11 @@
+{% extends "rest_framework/base.html" %}
+{% load static %}
+{% block script %}
+    <script src="{% static "api/api_wrapepr.js" %}"></script>
+{% endblock %}
+
+{% block branding %}
+    <a class='navbar-brand' rel="nofollow" href='/'>
+        Sour&Perky API playground.
+    </a>
+{% endblock %}
