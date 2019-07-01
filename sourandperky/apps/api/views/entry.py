@@ -1,5 +1,6 @@
 from django.db.models import ExpressionWrapper, BooleanField, Q, Count, F
-from rest_framework import viewsets
+from rest_framework import permissions
+from rest_framework.viewsets import ModelViewSet
 
 from apps.sour_and_perky.models import Entry
 from ..filters import EntryFilter
@@ -8,7 +9,7 @@ from ..permissions import IsOwnerOrReadOnly
 from ..serializer import EntrySerializer
 
 
-class EntryViewSet(viewsets.ModelViewSet):
+class EntryViewSet(ModelViewSet):
     queryset = Entry.objects.all()
     serializer_class = EntrySerializer
 
@@ -33,4 +34,4 @@ class EntryViewSet(viewsets.ModelViewSet):
 
     pagination_class = custom_paginator()
 
-    permission_classes = (IsOwnerOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
