@@ -1,11 +1,15 @@
 {% extends "rest_framework/base.html" %}
 {% load static %}
 {% block script %}
+    {{ block.super }}
     <script src="{% static "api/api_wrapepr.js" %}"></script>
 {% endblock %}
-
 {% block branding %}
     <a class='navbar-brand' rel="nofollow" href='/'>
         Sour&Perky API playground.
     </a>
 {% endblock %}
+{% block bootstrap_theme %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/3.4.1/superhero/bootstrap.min.css" type="text/css">
+{% endblock %}
+{% block bootstrap_navbar_variant %}{% endblock %}

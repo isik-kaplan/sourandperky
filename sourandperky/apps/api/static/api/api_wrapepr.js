@@ -99,7 +99,9 @@ function interract(url, auth_token, method, is_obj, allowed_methods, default_err
             return _interract(url, undefined, method, get_data, auth_token)
         }
     } else if ((method === METHODS.GET) && is_obj) { // retrieve
-        console.log('RETRIEVE');
+        return function () {
+            return _interract(url, undefined, method, undefined, auth_token)
+        }
     } else if (method === METHODS.PUT) { // update
         console.log('UPDATE')
     } else if (method === METHODS.PATCH) { // update
@@ -153,7 +155,15 @@ class CRUD_API_ENDPOINT {
         )(data)
     };
 
-    retrieve() {
+    retrieve(id) {
+        return interract(
+            this.get_object_url(id),
+            this.client.token,
+            METHODS.GET,
+            true,
+            this.allowed_methods,
+            this.default_error_function(METHODS.GET)
+        )()
     };
 
     update() {
@@ -244,4 +254,4 @@ class Client {
     }
 }
 
-
+let client = new Client();
