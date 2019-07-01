@@ -41,30 +41,20 @@ const METHODS = {
 };
 
 function filter_undefined(obj) {
-    Object.keys(obj).forEach(key => obj[key] === undefined && delete obj[key]);
-    return obj
+    return Object.fromEntries(
+        Object.entries(
+            obj
+        ).filter(([, value]) => !(value === undefined))
+    );
 }
 
-function build_url(url, parameters) {
-    parameters = filter_undefined(parameters);
-    let qs = "";
-    for (const key in parameters) {
-        if (parameters.hasOwnProperty(key)) {
-            const value = parameters[key];
-            qs += (
-                encodeURIComponent(key) +
-                "=" +
-                encodeURIComponent(value).replace(/%2C/g, ",")
-                + "&"
-            )
-        }
-    }
-    if (qs.length > 0) {
-        qs = qs.substring(0, qs.length - 1); //chop off last "&"
-        url = url + "?" + qs;
-    }
 
-    return url;
+function build_url( url, parameters ) {
+  const params = new URLSearchParams();
+  for (const param of Object.entries(filter_undefined(parameters))) {
+    params.set(...param);
+  }
+  return `${url}?${params.toString()}`;
 }
 
 function _interract(url, data, method, get_data, auth_token) {
