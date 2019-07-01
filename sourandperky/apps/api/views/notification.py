@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.permissions import IsAuthenticated
 
 from apps.notification.models import Notification
@@ -7,7 +7,7 @@ from ..permissions import IsOwnerOrDeny
 from ..serializer import NotificationSerializer
 
 
-class NotificationViewSet(viewsets.ReadOnlyModelViewSet):
+class NotificationViewSet(ReadOnlyModelViewSet):
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
 
