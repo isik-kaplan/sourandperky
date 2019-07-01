@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     # third party model
     'simple_history',
     'django_filters',
+    'crispy_forms',
 
     # custom
     'apps.api.apps.ApiConfig',
