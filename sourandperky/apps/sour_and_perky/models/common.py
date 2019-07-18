@@ -5,12 +5,18 @@ from django.db import models
 from simple_history.models import HistoricalRecords
 
 
-def first_user_id(cache={'user': None}):
-    if cache['user']:
-        return cache['user'].id
-    else:
-        cache['user'] = get_user_model().objects.order_by('timestamp').first()
-        return cache['user'].id
+def _first_user_id(cache={'user': None}):
+    def function():
+        if cache['user']:
+            return cache['user'].id
+        else:
+            cache['user'] = get_user_model().objects.order_by('timestamp').first()
+            return cache['user'].id
+
+    return function
+
+
+first_user_id = _first_user_id()
 
 
 class CommonFields(models.Model):
