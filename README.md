@@ -1,1 +1,1 @@
-![LOGO](sourandperkylogo.png)
+![LOGO](branding/sourandperkylogo.png)
