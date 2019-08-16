@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'simple_history',
     'django_filters',
     'crispy_forms',
+    'django_extensions',
 
     # custom
     'apps.api.apps.ApiConfig',
