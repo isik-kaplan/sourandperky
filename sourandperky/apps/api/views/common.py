@@ -13,5 +13,5 @@ class UpdateRetrieveListViewSet(*UpdateRetrieveListBases):
     ...
 
 
-class NotDeletableViewSet(UpdateRetrieveListViewSet, mixins.CreateModelMixin):
+class NotDeletableViewSet(mixins.CreateModelMixin, UpdateRetrieveListViewSet):
     ...
